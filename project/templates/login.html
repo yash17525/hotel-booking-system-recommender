@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <h1 class="heading">Supplementary Exam Login System</h1>
+</div>
+
+<div class="user_form">
+    <form class="inside_form" method="POST">
+    {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.rollno.label }} {{ form.rollno() }}
+        </div>
+    <br>
+        <div class="form-group">
+            {{ form.password.label }} {{ form.password() }}
+        </div>
+
+        <div class="form-group form-check">
+            {{ form.submit() }}
+        </div>
+    </form>
+</div>
+{% endblock %}
