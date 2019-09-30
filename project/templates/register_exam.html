@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="header">
+    <h1 class="heading">Register For Supplementary Examination</h1>
+</div>
+
+<div class="exam_register_form">
+    <form class="inside_form" method="POST">
+    {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.rollno.label }} {{ form.rollno() }}
+        </div>
+        <div class="form-group">
+            {{ form.name.label }} {{ form.name() }}
+        </div>
+    <br>
+        <div class="form-group">
+            {{ form.subject_code.label }} {{ form.subject_code() }}
+        </div>
+        <div class="form-group">
+            {{ form.branch.label }} {{ form.branch() }}
+        </div>
+        <div class="form-group form-check">
+            {{ form.submit() }}
+        </div>
+    </form>
+</div>
+{% endblock %}

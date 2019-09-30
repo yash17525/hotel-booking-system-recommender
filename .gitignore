@@ -1,1 +1,3 @@
 ER Diagram
+*.pyc
+__pycache__

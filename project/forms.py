@@ -14,8 +14,8 @@ class LoginForm(FlaskForm):
 
 class RegisterForm(FlaskForm):
 
-    name = StringField('Name',validators=[DataRequired()])
     rollno = IntegerField('Roll No.',validators=[DataRequired()])
+    name = StringField('Name',validators=[DataRequired()])
     branch = StringField('Branch',validators=[DataRequired()])
     official_email = db.Column(db.String(64), unique=True)
     password = PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message = 'password must match')])
@@ -25,3 +25,13 @@ class RegisterForm(FlaskForm):
     def validate_rollno(self, field):
         if Student.query.filter_by(rollno = field.data).first():
             raise ValidationError('Sorry, roll no. already registered!')
+
+class SupplementaryExamForm(FlaskForm):
+    """Serves purpose of registering data for a supplementary examination by a student
+    (in very elementary phase as of now)
+    """
+    rollno = IntegerField('Roll No.', validators=[DataRequired()])
+    name = StringField('Name', validators=[DataRequired()])
+    subject_code = StringField('Subject Code', validators=[DataRequired()])
+    branch = StringField('Branch', validators=[DataRequired()])
+    submit = SubmitField('Register!')
