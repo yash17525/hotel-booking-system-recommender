@@ -1,6 +1,9 @@
 from project import db,login_manager
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
+from sqlalchemy import *
+from sqlalchemy.orm import *
+
 
 @login_manager.user_loader
 def load_user(rollno):
@@ -26,14 +29,17 @@ class Student(db.Model, UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def get_id(self):
+           return (self.rollno)
+
 class SupplementaryExam(db.Model):
-    rollno = db.Column(db.Integer,ForeignKey('Student.rollno'), primary_key=True)
-    name = db.Column(db.String(64),ForeignKey('Student.name'))
-    subject_code = db.Column(db.String(64),ForeignKey('result.subject_code'))
-    branch = db.Column(db.String(64),ForeignKey('Student.branch'))
+    rollno = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    subject_code = db.Column(db.String(64))
+    branch = db.Column(db.String(64))
     # paid_status = db.Column(db.Boolean,ForeignKey('fees.paid_status'),default = False)
-    student = db.relationship('Student')
-    result = db.relationship('Result')
+    # student = db.relationship('Student')
+    # result = db.relationship('Result')
     # fees = db.relationship('Fees')
 
     def __init__(self, rollno, name, subject, branch, marks):
@@ -41,8 +47,9 @@ class SupplementaryExam(db.Model):
         self.name = name
         self.subject = subject
         self.branch = branch
-    def get_id(self):
-           return (self.rollno)
+
+    # def get_id(self):
+    #        return (self.rollno)
 
 
 """
