@@ -23,7 +23,7 @@ def loginPage():
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
-                next = url_for('admin.index')
+                next = url_for('admin.registerExam')
 
             return redirect(next)
 
@@ -48,7 +48,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Thanks for registering! Now you can login!')
-        return redirect(url_for('student.login'))
+        return redirect(url_for('admin.loginPage'))
     return render_template('register.html', form=form)
 
 @admin.route('/register_exam', methods=['GET', 'POST'])
