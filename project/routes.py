@@ -16,16 +16,21 @@ def loginPage():
     if form.validate_on_submit():
         stu = Student.query.filter_by(rollno = form.rollno.data).first()
 
-        if stu.check_password(form.password.data) and stu is not None:
+        if stu is not None and stu.check_password(form.password.data) :
 
-            login_user(stu)
             flash('Logged in successfully.')
+            login_user(stu)
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
                 next = url_for('admin.index')
 
             return redirect(next)
+
+        else:
+            flash('User is not registered.')
+            return render_template('login.html', form = form)
+
     return render_template('login.html', form=form)
 
 
@@ -35,7 +40,7 @@ def register():
     if form.validate_on_submit():
         user = Student(
                     name=form.name.data,
-                    roll_no=form.roll_no.data,
+                    rollno=form.rollno.data,
                     branch=form.branch.data,
                     official_email=form.official_email.data,
                     password=form.password.data,
@@ -43,5 +48,5 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Thanks for registering! Now you can login!')
-        return redirect(url_for('student.login'))
+        return redirect(url_for('admin.loginPage'))
     return render_template('register.html', form=form)
