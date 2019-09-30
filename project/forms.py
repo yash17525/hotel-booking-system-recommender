@@ -17,7 +17,7 @@ class RegisterForm(FlaskForm):
     rollno = IntegerField('Roll No.',validators=[DataRequired()])
     name = StringField('Name',validators=[DataRequired()])
     branch = StringField('Branch',validators=[DataRequired()])
-    official_email = db.Column(db.String(64), unique=True)
+    official_email = StringField('Official Email',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message = 'password must match')])
     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Register!')

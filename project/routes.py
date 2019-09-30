@@ -16,16 +16,21 @@ def loginPage():
     if form.validate_on_submit():
         stu = Student.query.filter_by(rollno = form.rollno.data).first()
 
-        if stu.check_password(form.password.data) and stu is not None:
+        if stu is not None and stu.check_password(form.password.data) :
 
-            login_user(stu)
             flash('Logged in successfully.')
+            login_user(stu)
             next = request.args.get('next')
 
             if next == None or not next[0]=='/':
                 next = url_for('admin.index')
 
             return redirect(next)
+
+        else:
+            flash('User is not registered.')
+            return render_template('login.html', form = form)
+
     return render_template('login.html', form=form)
 
 
