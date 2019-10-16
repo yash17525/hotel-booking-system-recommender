@@ -10,7 +10,7 @@ class LoginForm(FlaskForm):
 
     rollno = IntegerField('Roll No.',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
-    submit = SubmitField('LogIn')
+    submit = SubmitField('Login')
 
 class RegisterForm(FlaskForm):
 
@@ -22,9 +22,9 @@ class RegisterForm(FlaskForm):
     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
     submit = SubmitField('Register!')
 
-    def validate_rollno(self, field):
-        if Student.query.filter_by(rollno = field.data).first():
-            raise ValidationError('Sorry, roll no. already registered!')
+    def validate_rollno(self, rollno):
+        if Student.query.filter_by(rollno = rollno.data).first():
+            raise ValidationError('Roll no. already registered.')
 
 class SupplementaryExamForm(FlaskForm):
     """Serves purpose of registering data for a supplementary examination by a student

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<h3>Welcome aboard, this is your dashboard</h3> 
+
+<br><br>
+<p>
+    <h4>Profile Information</h4>
+    <b>Name:</b> <span>{{ student.name }}</span> <br>
+    <b>Roll No:</b> <span>{{ student.rollno }}</span>
+</p>
+
+<br><br>
+
+<p>
+    <h4>Actions Available</h4>
+        <button> <a href="{{ url_for('admin.registerExam', rollno=student.rollno) }}">Register for new exam</a></button>
+        <button>Current Enrollments</button>
+    </li>
+</p>
+{% endblock %}
+

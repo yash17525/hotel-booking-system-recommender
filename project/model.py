@@ -37,15 +37,11 @@ class SupplementaryExam(db.Model):
     name = db.Column(db.String(64))
     subject_code = db.Column(db.String(64))
     branch = db.Column(db.String(64))
-    # paid_status = db.Column(db.Boolean,ForeignKey('fees.paid_status'),default = False)
-    # student = db.relationship('Student')
-    # result = db.relationship('Result')
-    # fees = db.relationship('Fees')
 
-    def __init__(self, rollno, name, subject, branch, marks):
+    def __init__(self, rollno, name, subject_code, branch):
         self.rollno = rollno
         self.name = name
-        self.subject = subject
+        self.subject_code = subject_code
         self.branch = branch
 
     # def get_id(self):
