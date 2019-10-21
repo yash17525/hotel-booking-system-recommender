@@ -1,9 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="jumbotron">
+    <div align = 'center'>
+        <h1>Welcome to the page for {{current_user.name}}</h1>
+        <img align='center' src="{{url_for('static', filename = 'profile_pics/' + current_user.profile_image)}}" >
 
-
-<h3>Welcome aboard, this is your dashboard</h3> 
+    </div>
+</div>
 
 <br><br>
 <p>
@@ -17,8 +21,32 @@
 <p>
     <h4>Actions Available</h4>
         <button> <a href="{{ url_for('admin.registerExam', rollno=student.rollno) }}">Register for new exam</a></button>
-        <button>Current Enrollments</button>
+        <button><a href="{{ url_for('admin.enrollments', rollno=student.rollno) }}">Current Enrollments</a></button>
     </li>
 </p>
+
+<div class = "container">
+    <form method = "POST" action="" enctype="multipart/form-data">
+
+        <div class = "form-group">
+            {{form.hidden_tag()}}
+        </div>
+
+        <div class = "form-group">
+            {{form.picture.label(class = "form-group")}} 
+            {{form.picture(class='form-control')}}
+        </div>
+
+        <div class = "form-group">
+            {{form.submit(class='btn btn-primary')}}
+        </div>
+
+
+        
+        
+    </form>
+
+  </div>
+
 {% endblock %}
 

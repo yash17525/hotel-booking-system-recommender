@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1>Supplementary Examination System</h1>
+    <p>Here are your current enrollments</p>
+    <br>
+    {% for student in enrollments %}
+        <table>
+            <tr>
+                <td>{{student.rollno}}</td>
+                <td>{{student.name}}</td>
+                <td>{{student.subject_code}}</td>
+                <td>{{student.branch}}</td>
+                
+            </tr>
+        </table>
+    {% endfor %}
+</div>
+{% endblock %}
