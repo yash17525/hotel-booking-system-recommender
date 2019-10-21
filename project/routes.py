@@ -87,4 +87,8 @@ def registerExam(rollno):
         return redirect(url_for('admin.dashboard', rollno=rollno))
     return render_template('register_exam.html', form=form)
 
-# @admin.route
+@admin.route('/user/<rollno>/enrollments', methods=['GET', 'POST'])
+@login_required
+def enrollments(rollno):
+    enrollments = SupplementaryExam.query.filter_by(rollno=rollno)
+    return render_template('enrollments.html', enrollments=enrollments)

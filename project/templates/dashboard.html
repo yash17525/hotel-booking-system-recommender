@@ -21,7 +21,7 @@
 <p>
     <h4>Actions Available</h4>
         <button> <a href="{{ url_for('admin.registerExam', rollno=student.rollno) }}">Register for new exam</a></button>
-        <button><a href="#">Current Enrollments</a></button>
+        <button><a href="{{ url_for('admin.enrollments', rollno=student.rollno) }}">Current Enrollments</a></button>
     </li>
 </p>
 

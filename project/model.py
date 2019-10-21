@@ -35,7 +35,8 @@ class Student(db.Model, UserMixin):
            return (self.rollno)
 
 class SupplementaryExam(db.Model):
-    rollno = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key = True)
+    rollno = db.Column(db.Integer)
     name = db.Column(db.String(64))
     subject_code = db.Column(db.String(64))
     branch = db.Column(db.String(64))

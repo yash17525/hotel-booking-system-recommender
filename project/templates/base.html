@@ -30,7 +30,7 @@
     
 
 <nav class="navbar navbar-light bg-light">
-  <h1>SuplSyst</h1>
+  <h1><a href="{{url_for('admin.index')}}">SuplSyst</a></h1>
   {% if current_user.is_anonymous %}
     <a class="nav-link" href="{{ url_for('admin.loginPage') }}">Login</a>
     <a class="nav-link" href="{{ url_for('admin.register') }}">Register</a>
