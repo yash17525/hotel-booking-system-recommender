@@ -35,10 +35,10 @@ class SupplementaryExamForm(FlaskForm):
     """Serves purpose of registering data for a supplementary examination by a student
     (in very elementary phase as of now)
     """
-    rollno = IntegerField('Roll No.', validators=[DataRequired()])
-    name = StringField('Name', validators=[DataRequired()])
+    rollno = IntegerField('Roll No.', validators=[DataRequired()], render_kw={'readonly': True})
+    name = StringField('Name', validators=[DataRequired()], render_kw={'readonly': True})
     subject_code = StringField('Subject Code', validators=[DataRequired()])
-    branch = StringField('Branch', validators=[DataRequired()])
+    branch = StringField('Branch', validators=[DataRequired()], render_kw={'readonly': True})
     submit = SubmitField('Register!')
 
 class UpdateUserForm(FlaskForm):

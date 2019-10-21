@@ -85,6 +85,10 @@ def registerExam(rollno):
         db.session.commit()
         flash('Thanks for registering for exam. Once your payment status is uploaded & detected you will be eligible to give the exam.')
         return redirect(url_for('admin.dashboard', rollno=rollno))
+    elif request.method == 'GET':
+        form.rollno.data = current_user.rollno
+        form.name.data = current_user.name
+        form.branch.data = current_user.branch
     return render_template('register_exam.html', form=form)
 
 @admin.route('/user/<rollno>/enrollments', methods=['GET', 'POST'])

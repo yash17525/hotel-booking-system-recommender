@@ -4,11 +4,24 @@
 <head>
     <meta charset="utf-8">
     <title>SuplSyst</title>
-    <link rel="stylesheet" href="/static/nav.css">
+
+    <!-- bootstrap.css Files -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- bootstrap.js files -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- water.css file -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/light.min.css">
+   
+  <style>
+    body{
+      background-image: url('https://image.shutterstock.com/z/stock-vector-abstract-white-and-grey-on-light-silver-background-modern-design-vector-illustration-1496615492.jpg'); 
+    }
+  </style>
+
   </head>
   
 <body>
@@ -28,16 +41,22 @@
 {% endif %}
 {% endwith %}
     
-
-<nav class="navbar navbar-light bg-light">
-  <h1><a href="{{url_for('admin.index')}}">SuplSyst</a></h1>
-  {% if current_user.is_anonymous %}
-    <a class="nav-link" href="{{ url_for('admin.loginPage') }}">Login</a>
-    <a class="nav-link" href="{{ url_for('admin.register') }}">Register</a>
-  {% else %}
-    <span>{{current_user.name}}</span>
-    <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
-  {% endif %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <span><h1><a class="navbar-brand" href="{{url_for('admin.index')}}">SuplSyst</a></h1></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if current_user.is_anonymous %}
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.loginPage') }}">Login<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.register') }}">Register</a></li>
+      {% else %}
+        <span>{{current_user.name}}</span>
+        <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
+      {% endif %}
+    </ul>
+  </div>
 </nav>
 
 <div class="container">
