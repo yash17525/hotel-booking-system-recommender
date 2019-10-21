@@ -16,8 +16,10 @@ class Student(db.Model, UserMixin):
     rollno = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     branch = db.Column(db.String(64))
-    official_email = db.Column(db.String(64), unique=True)
+    official_email = db.Column(db.String(64), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    profile_image = db.Column(db.String(64),nullable=False,default='default_profile.jpg')
+    # profile_image = db.Column(db.String(64), nullable=False, default = 'default_profile.jpg')
 
     def __init__(self, rollno, name, branch, official_email, password):
         self.rollno = rollno
@@ -37,15 +39,16 @@ class SupplementaryExam(db.Model):
     name = db.Column(db.String(64))
     subject_code = db.Column(db.String(64))
     branch = db.Column(db.String(64))
+    # paid_status = db.Column(db.Boolean,ForeignKey('fees.paid_status'),default = False)
+    # student = db.relationship('Student')
+    # result = db.relationship('Result')
+    # fees = db.relationship('Fees')
 
     def __init__(self, rollno, name, subject_code, branch):
         self.rollno = rollno
         self.name = name
         self.subject_code = subject_code
         self.branch = branch
-
-    # def get_id(self):
-    #        return (self.rollno)
 
 
 """
