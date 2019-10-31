@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+<div class="card bg-light mb-3">
+    <div class="card-header"><h4 class="heading">Login</h4></div>
+    <div class="card-body">
+        <div class="user_form">
+                <form class="inside_form" method="POST">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ form.rollno.label }} {{ form.rollno() }}
+                    </div>
+                <br>            
+                    <div class="form-group form-check">
+                        {{ form.submit() }}
+                    </div>
+                </form>
+            </div>
+    </div>
+</div>
+{% endblock %}

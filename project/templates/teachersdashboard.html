@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Admin's Dashboard</h1>
+    <h4>Hi {{teacher.name}}</h4>
+
+    <h5>Actions Available:</h5>
+    <button><a href= "{{ url_for('admin.CurrentEnrollmentsAll') }}" >Current Enrollments</a></button>
+{% endblock %}

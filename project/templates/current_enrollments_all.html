@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Current Enrollments</h1>
+<h5>Current enrollments for this session are:</h5>
+
+{% for enroll in enrollments %}
+<table>
+    <tr>
+        <td>{{enroll.rollno}}</td>
+        <td>{{enroll.subject}}</td>
+        <td>{{enroll.grade}}</td>        
+    </tr>
+</table>
+{% endfor %}
+
+{% endblock %}

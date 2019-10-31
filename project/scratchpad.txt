@@ -1,0 +1,35 @@
+Current Result Database:
+
+[<RollNo: 15591, Name: Lakshman, Branch: CSE, Subject1: 88, Subject2: 89>, 
+<RollNo: 15598, Name: Mayank, Branch: CSE, Subject1: 81, Subject2: 89>, 
+<RollNo: 15599, Name: Ramesh, Branch: CSE, Subject1: 80, Subject2: 88>]
+
+Current Teachers Database:
+
+>>> Teachers.query.all()
+[<Name: Narottam C. Kaushal, Email: nck@nith.ac.in, Password: NCK>, 
+<Name: Johnny, Email: johnny@nith.ac.in, Password: J>]
+
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <span><h1><a class="navbar-brand" href="{{url_for('admin.index')}}">SuplSyst</a></h1></span>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% if current_user.is_anonymous %}
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.loginPage') }}">Login<span class="sr-only">(current)</span></a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.register') }}">Register</a></li>
+      {% else %}
+        <span>{{current_user.name}}</span>
+        <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
+      {% endif %}
+    </ul>
+  </div>
+</nav> -->
+
+            <!-- {{if result.subject1 < 30}}
+                <td>
+                    <button>Resister for Supplement</button>
+                </td>            
+            {{endif}} -->

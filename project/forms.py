@@ -8,7 +8,6 @@ from project import db
 from flask_wtf.file import FileAllowed, FileField
 
 class LoginForm(FlaskForm):
-
     rollno = IntegerField('Roll No.',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField('Login')
@@ -44,3 +43,21 @@ class SupplementaryExamForm(FlaskForm):
 class UpdateUserForm(FlaskForm):
     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
     submit = SubmitField('Update')
+
+
+#############################################################################################################################################################
+
+class TeachersLoginForm(FlaskForm):
+    email = StringField('Username/Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
+
+class ResultForm(FlaskForm):
+    rollno = StringField('Roll No', validators=[DataRequired()])
+    submit = SubmitField('Get Result')
+
+class EnrollNewForm(FlaskForm):
+    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={'readonly':True})
+    subject = StringField('Subject', validators=[DataRequired()], render_kw={'readonly':True})
+    password = StringField('Password', validators=[DataRequired()])
+    submit = SubmitField('Enroll Now')
