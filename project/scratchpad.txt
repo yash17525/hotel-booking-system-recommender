@@ -1,8 +1,10 @@
 Current Result Database:
 
-[<RollNo: 15591, Name: Lakshman, Branch: CSE, Subject1: 88, Subject2: 89>, 
-<RollNo: 15598, Name: Mayank, Branch: CSE, Subject1: 81, Subject2: 89>, 
-<RollNo: 15599, Name: Ramesh, Branch: CSE, Subject1: 80, Subject2: 88>]
+>>> Result.query.all()
+[<RollNo: 15991, Name: Joe, Branch: CSE, sem1: 1; DBMS:A, MaS:A, SST:F, EVS:F, sme2: 2; DBMS:A, MaS:A, SST:F, EVS:F, QQQ:F, sem3: -1>, 
+<RollNo: 15998, Name: Sins, Branch: CSE, sem1: 1; DBMS:A, MaS:A, SST:B, EVS:B, sme2: 2; DBMS:A, MaS:A, SST:B, EVS:B, sem3: 3; DBMS:A, MaS:A, SST:B>,
+ <RollNo: 15999, Name: Johny, Branch: CSE, sem1: 1; DBMS:A, MaS:A, SST:B, EVS:B, sme2: 2; DBMS:A, MaS:A, SST:B, EVS:B, sem3: -1>]
+
 
 Current Teachers Database:
 

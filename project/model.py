@@ -75,10 +75,10 @@ class Result(db.Model):
     sem9 = db.Column(db.String(256))
     sem10 = db.Column(db.String(256))
 
-    (sem1, sem2, sem3, sem4, sem5, sem6, sem7, sem8, sem9, sem10) = ('-1',)*10
 
     # '1; DBMS:A, MaS:A, SST:B, EVS:B'
-    def __init__(self, rollno, name, branch, sem1=None, sem2=None, sem3=None, sem4=None, sem5=None, sem6=None, sem7=None, sem8=None, sem9=None, sem10=None):
+    #  DBMS:A, MaS:A, SST:B, EVS:B
+    def __init__(self, rollno, name, branch, sem1, sem2, sem3, sem4, sem5, sem6, sem7, sem8, sem9, sem10):
         self.rollno = rollno
         self.name = name
         self.branch = branch

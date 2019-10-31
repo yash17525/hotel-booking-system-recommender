@@ -1,8 +1,8 @@
-"""init
+"""n
 
-Revision ID: ceb41500f289
+Revision ID: ae24e7842082
 Revises: 
-Create Date: 2019-10-30 20:29:45.544952
+Create Date: 2019-11-01 00:28:20.081441
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ceb41500f289'
+revision = 'ae24e7842082'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -22,6 +22,16 @@ def upgrade():
     sa.Column('rollno', sa.Integer(), nullable=False),
     sa.Column('name', sa.Integer(), nullable=True),
     sa.Column('branch', sa.String(length=64), nullable=True),
+    sa.Column('sem1', sa.String(length=256), nullable=True),
+    sa.Column('sem2', sa.String(length=256), nullable=True),
+    sa.Column('sem3', sa.String(length=256), nullable=True),
+    sa.Column('sem4', sa.String(length=256), nullable=True),
+    sa.Column('sem5', sa.String(length=256), nullable=True),
+    sa.Column('sem6', sa.String(length=256), nullable=True),
+    sa.Column('sem7', sa.String(length=256), nullable=True),
+    sa.Column('sem8', sa.String(length=256), nullable=True),
+    sa.Column('sem9', sa.String(length=256), nullable=True),
+    sa.Column('sem10', sa.String(length=256), nullable=True),
     sa.PrimaryKeyConstraint('rollno')
     )
     op.create_table('Student',

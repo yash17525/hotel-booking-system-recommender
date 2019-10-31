@@ -4,14 +4,14 @@
 <h1>Current Enrollments</h1>
 <h5>Current enrollments for this session are:</h5>
 
-{% for enroll in enrollments %}
 <table>
+{% for enroll in enrollments %}
     <tr>
         <td>{{enroll.rollno}}</td>
         <td>{{enroll.subject}}</td>
         <td>{{enroll.grade}}</td>        
     </tr>
+    {% endfor %}
 </table>
-{% endfor %}
 
 {% endblock %}

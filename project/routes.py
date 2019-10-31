@@ -140,34 +140,26 @@ def ResultLogin():
 
 @admin.route('/<rollno>/result', methods=['GET', 'POST'])
 def ResultDisplay(rollno):
+    def Extract(semResultString, rollno):
+        resultData1 = []
+        semesterData1 = semResultString.split('; ')[1].split(', ')
+        for each in semesterData1:
+            each = each.split(':')
+            if each[1] != 'F':
+                resultData1.append([each[0], each[1], 0])        
+            else:
+                if not Enrollments.query.filter_by(rollno=rollno, subject=each[0]).all():
+                    resultData1.append([each[0], each[1], 1])        
+                else:
+                    resultData1.append([each[0], each[1], 2])        
+        return resultData1
     result = Result.query.filter_by(rollno=rollno).first()
-
     resultData = []
-
-    resultData.append(['Roll No.', result.rollno, 0])
-    resultData.append(['Name', result.name, 0])
-    resultData.append(['Branch', result.branch, 0])
-
-    subjectName1 = result.subject1.split(', ')[0]
-    subjectMarks1 = result.subject1.split(', ')[1]
-    if int(subjectMarks1) < 30:
-        if not Enrollments.query.filter_by(rollno=result.rollno, subject=subjectName1).all():
-            resultData.append([subjectName1, subjectMarks1, 1])
-        else:
-            resultData.append([subjectName1, subjectMarks1, 2])
-    else:
-        resultData.append([subjectName1, subjectMarks1, 0])
-    subjectName2 = result.subject2.split(', ')[0]
-    subjectMarks2 = result.subject2.split(', ')[1]
-    if int(subjectMarks2) < 30:
-        if not Enrollments.query.filter_by(rollno=result.rollno, subject=subjectName1).all():
-            resultData.append([subjectName1, subjectMarks1, 1])
-        else:
-            resultData.append([subjectName1, subjectMarks1, 2])
-    else:
-        resultData.append([subjectName2, subjectMarks2, 0])
-
-    return render_template('result.html', resultData = resultData)
+    resultData.append([['Roll No.', result.rollno, '0'], ['Name', result.name, '0'], ['Branch', result.branch, '0']])
+    for i in range(1, 11):
+        if eval( "result.sem" +  str(i) +  "!="  "'-1'"):
+            resultData.append(Extract(eval( "result.sem" + str(i) ), result.rollno))
+    return render_template('result.html', resultData = resultData, rollno=result.rollno)
     
 @admin.route('/<rollno>/<subject>/enrollnew', methods=['GET', 'POST'])
 def EnrollNew(rollno, subject):

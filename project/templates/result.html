@@ -2,24 +2,26 @@
 
 {% block content %}
     <h1>Result Page</h1>
-    <table>
-    <tr>
-        <th></th>
-        <th></th>
-        <th>Actions Available</th>
-    </tr>
-    {% for rr in resultData %}
-        <tr>
-            <td><b>{{rr[0]}}</b></td>
-            <td>{{rr[1]}}</td>
-            {% if rr[2] == 1 %}
-                <td><a href="{{url_for('admin.EnrollNew', rollno=resultData[0][1], subject=rr[0])}}">Register Supplement</a></td>
-            {% elif rr[2] == 2 %}
-                <td>Already registered</td>
-            {% else %}
-                <td></td>
-            {% endif %}
-        </tr>  
+
+    {% for each in resultData %}
+        <table>
+            {% for rr in each %}
+                <tr>
+                    <td><b>{{rr[0]}}</b></td>
+                    <td>{{rr[1]}}</td>                
+                    {% if rr[2] == 1 %}
+                        <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
+                    {% elif rr[2] == 2 %}
+                        <td>Already registered</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}                
+                </tr>
+            {% endfor %}
+        </table>    
     {% endfor %}
-    </table>
-{% endblock %}
+
+
+
+
+    {% endblock %}
