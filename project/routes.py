@@ -4,8 +4,18 @@ from project.model import Student, SupplementaryExam, Teachers, Enrollments, Res
 from project.forms import LoginForm, SupplementaryExamForm, TeachersLoginForm, ResultForm, EnrollNewForm
 from flask_login import login_user, current_user, logout_user, login_required
 from project.picture_handler import add_profile_pic
+import stripe
+import os
 
 admin = Blueprint('admin',__name__)
+
+stripe_keys = {
+  'publishable_key': "pk_test_9hktSLMVKzCue2lLNllW7K0l00AIkzfNCm",
+  'secret_key': "sk_test_J5493998A9ss24idZ4wq16De00NKXcu6j0"
+}
+
+
+stripe.api_key = stripe_keys['secret_key']
 
 @admin.route('/')
 def index():
@@ -149,11 +159,13 @@ def ResultDisplay(rollno):
                 if not Enrollments.query.filter_by(rollno=rollno, subject=each[0]).all():
                     resultData1.append([each[0], each[1], 1])        
                 else:
-                    resultData1.append([each[0], each[1], 2])        
+                    if Enrollments.query.filter_by(rollno=rollno, subject=each[0]).first().payment == '0':
+                        resultData1.append([each[0], each[1], 2])
+                    else:
+                        resultData1.append([each[0], each[1], 3])
         return resultData1
     result = Result.query.filter_by(rollno=rollno).first_or_404()
     resultData = []
-    # resultData.append([['Roll No.', result.rollno, '0'], ['Name', result.name, '0'], ['Branch', result.branch, '0']])
     stu_info = Student.query.filter_by(rollno=rollno).first_or_404()
     for i in range(1, 11):
         if eval( "result.sem" +  str(i) +  "!="  "'-1'"):
@@ -176,4 +188,31 @@ def EnrollNew(rollno, subject):
     elif request.method == 'GET':
         form.rollno.data = rollno
         form.subject.data = subject
-    return render_template('enrollnew.html', form=form)
+    return render_template('enrollnew.html', form=form) #, key=stripe_keys['publishable_key']
+
+
+############For Payment###########
+
+@admin.route('/thankyou')
+def thankyou():
+    return render_template('thankyou.html')
+
+@admin.route('/<rollno>/<subject>/paymentpage')
+def paymentpage(rollno, subject):
+    return render_template('payment.html', rollno=rollno, subject=subject, key=stripe_keys['publishable_key'])
+
+@admin.route('/<rollno>/<subject>/payment', methods=['POST'])
+def payment(rollno, subject):
+    # CUSTOMER INFORMATION
+    customer = stripe.Customer.create(email=request.form['stripeEmail'],
+                                      source=request.form['stripeToken'])
+    # CHARGE/PAYMENT INFORMATION
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=2000,
+        currency='inr',
+        description='Fee'
+    )    
+    Enrollments.query.filter_by(rollno=rollno, subject=subject).first().payment = '1'
+    db.session.commit()
+    return redirect(url_for('admin.ResultDisplay', rollno=rollno, subject=subject))

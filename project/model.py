@@ -125,9 +125,11 @@ class Teachers(db.Model, UserMixin):
 class Enrollments(db.Model):
     rollno = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(64), primary_key=True)
+    payment = db.Column(db.String(64))
     def __init__(self, rollno, subject):
         self.rollno = rollno
         self.subject = subject
+        self.payment = 0
 
     def __repr__(self):
         return '<RollNo: {}, Subject: {}>'.format(self.rollno, self.subject)
