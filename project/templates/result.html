@@ -2,9 +2,26 @@
 
 {% block content %}
     <h1>Result Page</h1>
-
+    <hr>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>{{stu_info.name}}</td>
+        </tr>
+        <tr>
+            <td>Roll No.</td>
+            <td><a href="#">{{stu_info.rollno}}</a></td>
+        </tr>
+        <tr>
+            <td>Branch</td>
+            <td>{{stu_info.branch}}</td>
+        </tr>
+    </table>
+    <hr>
     {% for each in resultData %}
+        <p>Sem: {{loop.index}}</p>
         <table>
+
             {% for rr in each %}
                 <tr>
                     <td><b>{{rr[0]}}</b></td>
@@ -17,8 +34,9 @@
                         <td></td>
                     {% endif %}                
                 </tr>
-            {% endfor %}
-        </table>    
+                {% endfor %}
+            </table>    
+            <hr>
     {% endfor %}
 
 
