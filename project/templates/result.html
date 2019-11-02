@@ -17,8 +17,6 @@
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/bootstrap.min.css')}}"/>  
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='css/now-ui-kit.css')}}"/>
 </head>
-
-
 <body>
 <!-- <br><br>
     <div class="container">  
@@ -45,67 +43,62 @@
             </div>
     </div> -->
     <br>
+    
     <div class="container">
-        {% for each in resultData[0:1] %}
-            <div class="card">          
-                <div class="card-body">
-                    <h4 class="card-title">About You</h4>
-                    <div class="table-responsive">
-                    <table class="table">
-                        <tbody>
-                            {% for rr in each %}
-                                <tr>
-                                    <td><b>{{rr[0]}}</b></td>
-                                    <td>{{rr[1]}}</td>                
-                                    {% if rr[2] == 1 %}
-                                        <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
-                                    {% elif rr[2] == 2 %}
-                                        <td>Already registered</td>
-                                    {% else %}
-                                        <td></td>
-                                    {% endif %}                
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>   
-                </div>
-                </div>
-            </div> 
-        {% endfor %}
+            <div class="table-responsive">
+            <table class="table">
+                <tr>
+                    <td>Name</td>
+                    <td>{{stu_info.name}}</td>
+                </tr>
+                <tr>
+                    <td>Roll No.</td>
+                    <td><a href="#">{{stu_info.rollno}}</a></td>
+                </tr>
+                <tr>
+                    <td>Branch</td>
+                    <td>{{stu_info.branch}}</td>
+                </tr>
+            </table>
     </div>
 
     <div class="container">
         <br>
         <br>
-        {% for each in resultData[1:] %}
+        {% for each in resultData %}
             <div class="card">              
                 <div class="card-body">
-                <h4 class="card-title">Semester each[0]</h4>
+                <h4 class="card-title">Semester: {{loop.index}}</h4>
                 <div class="table-responsive">
-                    <table class="table">
-                        <thead class=" text-primary">
-                            <tr>
-                                <th>Subject</th>
-                                <th>Grade</th>
-                                <th>Actions Available</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for rr in each %}
-                                <tr>
-                                    <td><b>{{rr[0]}}</b></td>
-                                    <td>{{rr[1]}}</td>                
-                                    {% if rr[2] == 1 %}
-                                        <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
-                                    {% elif rr[2] == 2 %}
-                                        <td>Already registered</td>
-                                    {% else %}
-                                        <td></td>
-                                    {% endif %}                
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>   
+                        <table class="table">
+                                <thead class=" text-primary">
+                                        <tr>
+                                            <th>Subject</th>
+                                            <th>Grade</th>
+                                            <th>Actions Available</th>
+                                        </tr>
+                                    </thead>
+                                
+                                <tbody>
+                                {% for rr in each %}
+                                    <tr>
+                                        <td><b>{{rr[0]}}</b></td>
+                                        <td>{{rr[1]}}</td>
+                                        {% if rr[2] == 1 %}
+                                            <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
+                                        {% elif rr[2] == 0 %}
+                                            <td></td>
+                                        {% else %}
+                                            {% if rr[2] == 2 %}                        
+                                                <td>Already registered & Pay<a href="{{url_for('admin.paymentpage', rollno=rollno, subject=rr[0])}}">(Pay now)</a></td>
+                                            {% elif rr[2] == 3 %}
+                                                <td>Already registered & Paid</td>
+                                            {% endif %}
+                                        {% endif %}                
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                                </table>    
                 </div>
                 </div>
             </div> 
