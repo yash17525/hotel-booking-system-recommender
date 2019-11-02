@@ -17,6 +17,8 @@ Migrate(app,db)
 
 login_manager = LoginManager()
 
+app.static_folder = 'static'
+
 login_manager.init_app(app)
 
 # login_manager.login_view = "student.login"

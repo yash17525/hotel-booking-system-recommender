@@ -12,26 +12,129 @@ Current Teachers Database:
 [<Name: Narottam C. Kaushal, Email: nck@nith.ac.in, Password: NCK>, 
 <Name: Johnny, Email: johnny@nith.ac.in, Password: J>]
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <span><h1><a class="navbar-brand" href="{{url_for('admin.index')}}">SuplSyst</a></h1></span>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      {% if current_user.is_anonymous %}
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.loginPage') }}">Login<span class="sr-only">(current)</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.register') }}">Register</a></li>
-      {% else %}
-        <span>{{current_user.name}}</span>
-        <a class="nav-link" href="{{ url_for('admin.logout') }}">Logout</a>
-      {% endif %}
-    </ul>
-  </div>
-</nav> -->
 
-            <!-- {{if result.subject1 < 30}}
-                <td>
-                    <button>Resister for Supplement</button>
-                </td>            
-            {{endif}} -->
+<!-- {% extends "base.html" %}
+
+{% block content %}
+<br><br>
+<div class="card bg-light mb-3">
+    <div class="card-header"><h4 class="heading">Login</h4></div>
+    <div class="card-body">
+        <div class="user_form">
+                <form class="inside_form" method="POST">
+
+
+
+                        {{ form.csrf_token }}
+                        {{ form.hidden_tag() }}
+                            <div class="form-group">
+                                {{ form.email.label }} {{ form.email() }}
+                            </div>
+                        <br>
+                            <div class="form-group">
+                                {{ form.password.label }} {{ form.password() }}
+                            </div>
+                            <div class="form-group form-check">
+                                {{ form.submit() }}
+                            </div>
+
+
+
+
+
+
+                </form>
+            </div>
+    </div>
+</div>
+{% endblock %} -->
+
+============================================================================================================
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+<div class="card bg-light mb-3">
+    <div class="card-header"><h4 class="heading">Enroll For Supplementary Examination</h4></div>
+    <div class="card-body"
+        <div class="exam_register_form">
+            <form class="inside_form" method="POST">
+                {{ form.csrf_token }}
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.rollno.label }} {{ form.rollno() }}
+                </div>
+                <div class="form-group">
+                    {{ form.subject.label }} {{ form.subject() }}
+                </div>
+                <div class="form-group">
+                        {{ form.password.label }} {{ form.password() }}
+                    </div>
+                <div class="form-group form-check">
+                    {{ form.submit() }}
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+===============================================================================================================
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Result Page</h1>
+
+    {% for each in resultData %}
+        <table>
+            {% for rr in each %}
+                <tr>
+                    <td><b>{{rr[0]}}</b></td>
+                    <td>{{rr[1]}}</td>                
+                    {% if rr[2] == 1 %}
+                        <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
+                    {% elif rr[2] == 2 %}
+                        <td>Already registered</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}                
+                </tr>
+            {% endfor %}
+        </table>    
+    {% endfor %}
+
+
+
+
+    {% endblock %}
+
+========================================================================================================
+
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Result Page</h1>
+
+    {% for each in resultData %}
+        <table>
+            {% for rr in each %}
+                <tr>
+                    <td><b>{{rr[0]}}</b></td>
+                    <td>{{rr[1]}}</td>                
+                    {% if rr[2] == 1 %}
+                        <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
+                    {% elif rr[2] == 2 %}
+                        <td>Already registered</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}                
+                </tr>
+            {% endfor %}
+        </table>    
+    {% endfor %}
+
+
+
+
+    {% endblock %}

@@ -48,16 +48,16 @@ class UpdateUserForm(FlaskForm):
 #############################################################################################################################################################
 
 class TeachersLoginForm(FlaskForm):
-    email = StringField('Username/Email', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
+    email = StringField('Username/Email', validators=[DataRequired()], render_kw={"placeholder":"Email/Username"})
+    password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder":"Password"})
     submit = SubmitField('Login')
 
 class ResultForm(FlaskForm):
-    rollno = StringField('Roll No', validators=[DataRequired()])
+    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={"placeholder":"Roll No."})
     submit = SubmitField('Get Result')
 
 class EnrollNewForm(FlaskForm):
-    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={'readonly':True})
-    subject = StringField('Subject', validators=[DataRequired()], render_kw={'readonly':True})
-    password = StringField('Password', validators=[DataRequired()])
+    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={"readonly":True, "placeholder":"Roll No."})
+    subject = StringField('Subject', validators=[DataRequired()], render_kw={"readonly":True, "placeholder":"Subject"})
+    password = PasswordField('Subject', validators=[DataRequired()], render_kw={"placeholder":"Password"})
     submit = SubmitField('Enroll Now')

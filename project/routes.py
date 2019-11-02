@@ -106,14 +106,17 @@ def logout():
 def TeachersLogin():
     form = TeachersLoginForm()
     if form.validate_on_submit():
+        print(form.email.data)
+        print(form.password.data)
         teacher = Teachers.query.filter_by(email = form.email.data).first()
-        if teacher is not None and teacher.check_password(form.password.data) :
+        if teacher is not None and teacher.check_password(form.password.data):
             flash('Logged in successfully.')
             login_user(teacher)
             return redirect(url_for('admin.TeachersDashboard', email = teacher.email))
         else:
             flash('User is not registered.')
             return render_template('teacherslogin.html', form = form)
+    teacher = Teachers.query.filter_by(email = form.email.data).first()
     return render_template('teacherslogin.html', form=form)
 
 @admin.route('/<email>/teachersdashboard', methods=['GET', 'POST'])
