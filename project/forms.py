@@ -12,23 +12,23 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password',validators=[DataRequired()])
     submit = SubmitField('Login')
 
-class RegisterForm(FlaskForm):
+# class RegisterForm(FlaskForm):
 
-    rollno = IntegerField('Roll No.',validators=[DataRequired()])
-    name = StringField('Name',validators=[DataRequired()])
-    branch = StringField('Branch',validators=[DataRequired()])
-    official_email = StringField('Official Email',validators=[DataRequired(), Email()])
-    password = PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message = 'password must match')])
-    pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('Register!')
+#     rollno = IntegerField('Roll No.',validators=[DataRequired()])
+#     name = StringField('Name',validators=[DataRequired()])
+#     branch = StringField('Branch',validators=[DataRequired()])
+#     official_email = StringField('Official Email',validators=[DataRequired(), Email()])
+#     password = PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message = 'password must match')])
+#     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
+#     submit = SubmitField('Register!')
 
-    def validate_rollno(self, rollno):
-        if Student.query.filter_by(rollno = rollno.data).first():
-            raise ValidationError('Roll no. already registered.')
+#     def validate_rollno(self, rollno):
+#         if Student.query.filter_by(rollno = rollno.data).first():
+#             raise ValidationError('Roll no. already registered.')
 
-    def check_email(self,field):
-        if Student.query.filter_by(official_email=field.data).first():
-            raise ValidationError('Email already registered!')
+#     def check_email(self,field):
+#         if Student.query.filter_by(official_email=field.data).first():
+#             raise ValidationError('Email already registered!')
 
 class SupplementaryExamForm(FlaskForm):
     """Serves purpose of registering data for a supplementary examination by a student
@@ -40,9 +40,9 @@ class SupplementaryExamForm(FlaskForm):
     branch = StringField('Branch', validators=[DataRequired()], render_kw={'readonly': True})
     submit = SubmitField('Register!')
 
-class UpdateUserForm(FlaskForm):
-    picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png'])])
-    submit = SubmitField('Update')
+# class UpdateUserForm(FlaskForm):
+#     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+#     submit = SubmitField('Update')
 
 
 #############################################################################################################################################################

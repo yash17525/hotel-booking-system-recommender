@@ -7,7 +7,7 @@
 <table>
 {% for enroll in enrollments %}
     <tr>
-        <td>{{enroll.rollno}}</td>
+        <td><a href="{{ url_for('admin.dashboard', rollno=enroll.rollno) }}">{{enroll.rollno}}</a></td>
         <td>{{enroll.subject}}</td>
         <td>{{enroll.grade}}</td>        
     </tr>

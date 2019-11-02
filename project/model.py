@@ -94,7 +94,7 @@ class Result(db.Model):
         self.sem10 = sem10
 
     def __repr__(self):
-        return '<RollNo: {}, Name: {}, Branch: {}, sem1: {}, sme2: {}, sem3: {}>'.format(self.rollno, self.name, self.branch, self.sem1, self.sem2, self.sem3)
+        return '<RollNo: {}, Name: {}, Branch: {}, sem1: {}, sem2: {}, sem3: {}>'.format(self.rollno, self.name, self.branch, self.sem1, self.sem2, self.sem3)
 
 # Teachers Database FIXED
 class Teachers(db.Model, UserMixin):
@@ -125,9 +125,11 @@ class Teachers(db.Model, UserMixin):
 class Enrollments(db.Model):
     rollno = db.Column(db.Integer, primary_key=True)
     subject = db.Column(db.String(64), primary_key=True)
+    payment = db.Column(db.String(64))
     def __init__(self, rollno, subject):
         self.rollno = rollno
         self.subject = subject
+        self.payment = 0
 
     def __repr__(self):
         return '<RollNo: {}, Subject: {}>'.format(self.rollno, self.subject)
