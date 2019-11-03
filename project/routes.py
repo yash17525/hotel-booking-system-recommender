@@ -75,7 +75,8 @@ def dashboard(rollno):
 
     # profile_image = url_for('static', filename = 'profile_pics/' + current_user.profile_image)
     student = Student.query.filter_by(rollno=rollno).first_or_404()
-    return render_template('dashboard.html', student=student)
+    count_enrollments = Enrollments.query.filter_by(rollno=rollno).count()
+    return render_template('dashboard.html', student=student, count_enrollments=count_enrollments)
 
 
 
