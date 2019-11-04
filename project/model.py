@@ -62,7 +62,7 @@ class SupplementaryExam(db.Model):
 class Result(db.Model):
     __tablename__ = 'Result'
     rollno = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.Integer)
+    name = db.Column(db.String(64))
     branch = db.Column(db.String(64))
     sem1 = db.Column(db.String(256))
     sem2 = db.Column(db.String(256))

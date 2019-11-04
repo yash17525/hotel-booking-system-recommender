@@ -5,6 +5,7 @@ Current Result Database:
 <RollNo: 15998, Name: Sins, Branch: CSE, sem1: 1; DBMS:A, MaS:A, SST:B, EVS:B, sme2: 2; DBMS:A, MaS:A, SST:B, EVS:B, sem3: 3; DBMS:A, MaS:A, SST:B>,
  <RollNo: 15999, Name: Johny, Branch: CSE, sem1: 1; DBMS:A, MaS:A, SST:B, EVS:B, sme2: 2; DBMS:A, MaS:A, SST:B, EVS:B, sem3: -1>]
 
+<RollNo: 12213, Name: Ayush, Branch: ME, sem1: 1; EngMath:A, Communication:A, SST:B, EVS:B, sem2: 2; Graphics:A, EngMath 2:A, CommunicationEngineering:B, EngineeringDrawing:B, sem3: 3; Microprocessor:A, OOPs:A, BasicElectronics:B, Probability:B>
 
 Current Teachers Database:
 

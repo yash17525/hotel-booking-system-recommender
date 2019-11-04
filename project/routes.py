@@ -171,6 +171,7 @@ def ResultDisplay(rollno):
     result = Result.query.filter_by(rollno=rollno).first_or_404()
     resultData = []
     stu_info = Student.query.filter_by(rollno=rollno).first_or_404()
+    
     for i in range(1, 11):
         if eval( "result.sem" +  str(i) +  "!="  "'-1'"):
             resultData.append(Extract(eval( "result.sem" + str(i) ), result.rollno))
