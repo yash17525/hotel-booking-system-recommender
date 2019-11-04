@@ -22,7 +22,7 @@
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>
-    Admin Login
+    Enrollments
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
   <!--     Fonts and icons     -->
@@ -34,58 +34,50 @@
 </head>
 <body>
     <br>
-
     <div class="container">
-        <br>
-        <br>
-
-        <table>
-                {% for student in enrollment %}
-                <tr>
-                    <td>{{student.rollno}}</td>
-                    <td>{{student.subject}}</td>
-                </tr>
-                {% endfor %}
-        </table>
-        {% for each in resultData %}
-            <div class="card">              
-                <div class="card-body">
-                <h4 class="card-title">Semester: {{loop.index}}</h4>
-                <div class="table-responsive">
+            <nav class="navbar navbar-expand-lg bg-primary">
+                    <div class="container">
+                      <a class="navbar-brand" href="{{url_for('admin.index')}}">Home</a>
+                      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav">
+                          <li class="nav-item ">
+                            <a class="nav-link" href="{{url_for('admin.ResultLogin')}}"> Results <span class="sr-only">(current)</span></a>
+                          </li>
+                          
+                          
+                        </ul>
+                      </div>
+                    </div>
+                  </nav>
+                <div class="card">              
+                    <div class="card-body">
+                    <h4 class="card-title">Enrollments</h4>
+                    <div class="table-responsive">
                         <table class="table">
-                                <thead class=" text-primary">
-                                        <tr>
-                                            <th>Subject</th>
-                                            <th>Grade</th>
-                                            <th>Actions Available</th>
-                                        </tr>
-                                    </thead>
-                                
-                                <tbody>
-                                {% for rr in each %}
-                                    <tr>
-                                        <td><b>{{rr[0]}}</b></td>
-                                        <td>{{rr[1]}}</td>
-                                        {% if rr[2] == 1 %}
-                                            <td><a href="{{url_for('admin.EnrollNew', rollno=rollno, subject=rr[0])}}">Register Supplement</a></td>
-                                        {% elif rr[2] == 0 %}
-                                            <td></td>
-                                        {% else %}
-                                            {% if rr[2] == 2 %}                        
-                                                <td>Already registered & Pay<a href="{{url_for('admin.paymentpage', rollno=rollno, subject=rr[0])}}">(Pay now)</a></td>
-                                            {% elif rr[2] == 3 %}
-                                                <td>Already registered & Paid</td>
-                                            {% endif %}
-                                        {% endif %}                
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                                </table>    
-                </div>
-                </div>
-            </div> 
-        {% endfor %}
-    </div>
+                            <thead class=" text-primary">
+                                <tr>
+                                    <th>Roll No</th>
+                                    <th>Subject</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody>
+                                {% for student in enrollment %}
+                                <tr>
+                                    <td>{{student.rollno}}</td>
+                                    <td>{{student.subject}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            </table>    
+                    </div>
+                    </div>
+                </div> 
+            
+        </div>
 </body>
 
 
