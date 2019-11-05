@@ -66,11 +66,15 @@
                                 
                                 <tbody>
                                 {% for enroll in enrollments %}
+                                
+                                {% if enroll.payment == '1' %}
                                 <tr>
-                                    <td><a href="{{ url_for('admin.dashboard', rollno=enroll.rollno) }}">{{enroll.rollno}}</a></td>
-                                    <td>{{enroll.subject}}</td>
-                                    <td>{{enroll.grade}}</td>        
-                                 </tr>
+                                  <td><a href="{{ url_for('admin.dashboard', rollno=enroll.rollno) }}">{{enroll.rollno}}</a></td>
+                                  <td>{{enroll.subject}}</td>
+                                  <td>{{enroll.grade}}</td>        
+                               </tr>
+                                {% endif %}
+                                
                                 {% endfor %}
                                 </tbody>
                         </table>    
