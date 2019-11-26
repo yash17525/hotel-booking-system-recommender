@@ -7,7 +7,6 @@ from flask_login import LoginManager
 app= Flask(__name__)
 app.config['SECRET_KEY'] = 'mykey'
 
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'+os.path.join(basedir,'data.sqlite')
@@ -21,8 +20,7 @@ login_manager = LoginManager()
 app.static_folder = 'static'
 
 login_manager.init_app(app)
-
-# login_manager.login_view = "student.login"
+# login_manager.login_view = 'admin.book_room'
 
 from project.routes import admin
 

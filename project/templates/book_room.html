@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Fill the Credentials</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.checkIn.label }}<br>
+            {{ form.checkIn(size=32) }}<br>
+            {% for error in form.checkIn.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.checkOut.label }}<br>
+            {{ form.checkOut(size=32) }}<br>
+            {% for error in form.checkOut.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.totalMembers.label }}<br>
+            {{ form.totalMembers(size=32) }}<br>
+            {% for error in form.totalMembers.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %} -->
+

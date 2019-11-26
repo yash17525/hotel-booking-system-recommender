@@ -20,40 +20,44 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg bg-primary">
-        <div class="container">
-          <a class="navbar-brand" href="{{url_for('admin.index')}}">Home</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-              <li class="nav-item ">
-                <a class="nav-link" href="{{url_for('admin.ResultLogin')}}"> Results <span class="sr-only">(current)</span></a>
+              <li class="nav-item active">
+                <a class="nav-link" href="{{url_for('admin.index')}}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url_for('admin.TeachersLogin')}}">Admin Login</a>
+                <a class="nav-link" href="{{url_for('admin.Book')}}">Booking</a>
               </li>
-              
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.signup')}}">Signup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.UserLogin')}}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="">Admin</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
 
       <div class="card bg-light mb-3">
-            <div class="card-header"><h4 class="heading">&ensp; Enroll For Supplementary Examination</h4></div>
+            <div class="card-header"><h4 class="heading">&ensp;  </h4></div>
             <div class="card-body"
                 <div class="exam_register_form">
-                <form action="{{url_for('admin.payment', rollno=rollno, subject=subject)}}" method="POST">
+                  <form action="{{url_for('admin.payment',amount = data['amount'])}}" method="POST">
                         <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key={{key}}
-                            data-amount="2000"
-                            data-name="Supplementary Fee"
+                            data-amount= {{data['amount']}}
+                            data-name="Hotel Booking Fee"
                             data-description="Fee"
                             data-locale="auto"
                             data-zip-code="true">
                         </script>
-                </form>
+                  </form>
+                  <a href="{{url_for('admin.draft')}}">Save Data & Pay later</a>
                 </div>
             </div>
             </div>

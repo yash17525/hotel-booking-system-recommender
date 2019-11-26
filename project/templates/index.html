@@ -24,7 +24,7 @@
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>
-      Supplementary Registration
+      Hotel Registration
     </title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
     <!--     Fonts and icons     -->
@@ -98,21 +98,67 @@
   </nav> -->
   <!-- End Navbar -->
 
-  <div class="wrapper">
-    <div class="page-header page-header-large">
-      <div class="page-header-image" data-parallax="true" style="background-image: url('/static/img/nit3.png');">
-      </div>
-      <div class="content-center">
-        <div class="container">
-          <h1 class="title" id="heading_animation">National Institute of Technology Hamirpur, India</h1>
-          <div class="text-center">
-            <a href="{{url_for('admin.ResultLogin')}}" class="btn btn-primary btn-round btn-lg">Result</a> 
-            &nbsp;&nbsp;&nbsp;&nbsp;    
-            <a href="{{url_for('admin.TeachersLogin')}}" class="btn btn-primary btn-round btn-lg">Admin</a>
+  <nav class="navbar navbar-expand-lg bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active ">
+              <a class="nav-link" href="{{url_for('admin.index')}}">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('admin.Book')}}">Booking</a>
+            </li>
+            {% if current_user.is_anonymous %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.signup')}}">Signup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.UserLogin')}}">Login</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="{{url_for('admin.adminLogin')}}">Admin</a>
+              </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.userDashboard')}}">Dashboard</a>
+            </li> 
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('admin.recommended')}}">Recommended</a>
+            </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{url_for('admin.logout')}}">Logout</a>
+              </li>
+            {% endif %}
+          </ul>
         </div>
-       </div>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <div class="page-header page-header-large">
+        <div class="page-header-image" data-parallax="true" style="background-image: url('/static/img/nit3.png');"></div>
+            <div class="content-center">
+              <div class="container">
+                <h1 class="title" id="heading_animation">Welcome</h1>
+                <div class="text-center">
+                </div>
+              </div>
+            </div>
       </div>
     </div>
+  
+
+
+
+
+    <!-- hotel ends -->
     <footer class="footer footer-default">
       <div class=" container ">
         <nav>

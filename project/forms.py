@@ -3,61 +3,44 @@ from wtforms import StringField,SubmitField,PasswordField,IntegerField
 from werkzeug.security import generate_password_hash,check_password_hash
 from wtforms.validators import Email,EqualTo,DataRequired
 from wtforms import ValidationError
-from project.model import Student
+from project.model import Users
 from project import db
 from flask_wtf.file import FileAllowed, FileField
 
-class LoginForm(FlaskForm):
-    rollno = IntegerField('Roll No.',validators=[DataRequired()])
+######################   user area #################################
+class RegisterForm(FlaskForm):
+    
+    userId = IntegerField('User Id',validators=[DataRequired()])
+    name = StringField('Name',validators=[DataRequired()])
     password = PasswordField('Password',validators=[DataRequired()])
-    submit = SubmitField('Login')
-
-# class RegisterForm(FlaskForm):
-
-#     rollno = IntegerField('Roll No.',validators=[DataRequired()])
-#     name = StringField('Name',validators=[DataRequired()])
-#     branch = StringField('Branch',validators=[DataRequired()])
-#     official_email = StringField('Official Email',validators=[DataRequired(), Email()])
-#     password = PasswordField('Password',validators=[DataRequired(),EqualTo('pass_confirm',message = 'password must match')])
-#     pass_confirm = PasswordField('Confirm password', validators=[DataRequired()])
-#     submit = SubmitField('Register!')
-
-#     def validate_rollno(self, rollno):
-#         if Student.query.filter_by(rollno = rollno.data).first():
-#             raise ValidationError('Roll no. already registered.')
-
-#     def check_email(self,field):
-#         if Student.query.filter_by(official_email=field.data).first():
-#             raise ValidationError('Email already registered!')
-
-class SupplementaryExamForm(FlaskForm):
-    """Serves purpose of registering data for a supplementary examination by a student
-    (in very elementary phase as of now)
-    """
-    rollno = IntegerField('Roll No.', validators=[DataRequired()], render_kw={'readonly': True})
-    name = StringField('Name', validators=[DataRequired()], render_kw={'readonly': True})
-    subject_code = StringField('Subject Code', validators=[DataRequired()])
-    branch = StringField('Branch', validators=[DataRequired()], render_kw={'readonly': True})
+    password2 = PasswordField(
+        'Confirm password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Register!')
 
-# class UpdateUserForm(FlaskForm):
-#     picture = FileField('Update Profile Picture', validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
-#     submit = SubmitField('Update')
+    def validate_userId(self, userId):
+        if Users.query.filter_by(userId = userId.data).first():
+            raise ValidationError('user another user Id')
 
+class RoomBookForm(FlaskForm):
+    checkIn = StringField('Check-In Date',validators=[DataRequired()],render_kw={"placeholder":"dd/mm/yyyy"})
+    checkOut = StringField('Check-Out Date',validators=[DataRequired()],render_kw={"placeholder":"dd/mm/yyyy"})
+    totalMembers = IntegerField('Total Visiting Member',validators = [DataRequired()],render_kw={"placeholder":"Total Visiting Members"})
+    submit = SubmitField('Proceed to pay')
 
-#############################################################################################################################################################
+class checkOutForm(FlaskForm):
+    userId = IntegerField('UserId',validators = [DataRequired()],render_kw={"placeholder":"Enter Unique User ID"})
+    hotelId = StringField('Hotel ID',validators=[DataRequired()],render_kw={"placeholder":"Enter Hotel ID"})
+    roomNo = StringField('Room Number',validators=[DataRequired()],render_kw={"placeholder":"Enter Room Number"})
+    submit = SubmitField('Check-Out User')
+    # def validate_userId(self, userId):
+        # if Users.query.filter_by(userId = userId.data).first():
+            # raise ValidationError('user another user Id')
 
-class TeachersLoginForm(FlaskForm):
-    email = StringField('Username/Email', validators=[DataRequired()], render_kw={"placeholder":"Email/Username"})
+class UserLoginForm(FlaskForm):
+    userId = StringField('UserId', validators=[DataRequired()], render_kw={"placeholder":"User Id"})
     password = PasswordField('Password', validators=[DataRequired()], render_kw={"placeholder":"Password"})
     submit = SubmitField('Login')
 
-class ResultForm(FlaskForm):
-    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={"placeholder":"Roll No."})
-    submit = SubmitField('Get Result')
 
-class EnrollNewForm(FlaskForm):
-    rollno = StringField('Roll No', validators=[DataRequired()], render_kw={"readonly":True, "placeholder":"Roll No."})
-    subject = StringField('Subject', validators=[DataRequired()], render_kw={"readonly":True, "placeholder":"Subject"})
-    password = PasswordField('Subject', validators=[DataRequired()], render_kw={"placeholder":"Password"})
-    submit = SubmitField('Enroll Now')
+
+################### user area ends ###################################

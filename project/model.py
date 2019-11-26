@@ -6,25 +6,22 @@ from sqlalchemy.orm import *
 
 
 @login_manager.user_loader
-def load_user(rollno):
-    return Student.query.get(rollno)
-
-class Student(db.Model, UserMixin):
-    __tablename__ = 'Student'
-    rollno = db.Column(db.Integer, primary_key=True)
+def load_user(userId):
+    return Users.query.get(int(userId))
+#######################user area################################
+class Users(db.Model, UserMixin):
+    __tablename__ = 'Users'
+    userId = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
-    branch = db.Column(db.String(64))
-    official_email = db.Column(db.String(64), unique=True, index=True)
     password = db.Column(db.String(128))
     password_hash = db.Column(db.String(128))
-    profile_image = db.Column(db.String(64),nullable=False,default='default_profile.jpg')
-    # profile_image = db.Column(db.String(64), nullable=False, default = 'default_profile.jpg')
+    # profile_image = db.Column(db.String(64),nullable=False,default='default_profile.jpg')
+    # profile_image = db.Column(db.String(64)
+    # , nullable=False, default = 'default_profile.jpg')
 
-    def __init__(self, rollno, name, branch, official_email, password):
-        self.rollno = rollno
+    def __init__(self,userId, name, password):
+        self.userId = userId
         self.name = name
-        self.branch = branch
-        self.official_email = official_email
         self.password = password
         self.password_hash = generate_password_hash(password)
 
@@ -32,104 +29,138 @@ class Student(db.Model, UserMixin):
         return check_password_hash(self.password_hash, password)
 
     def get_id(self):
-        return (self.rollno)
+        return (self.userId)
 
-    def __repr__(self):
-        return '<Name: {}, Email: {}, Password: {}>'.format(self.name, self.official_email, self.password)
-
-class SupplementaryExam(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    rollno = db.Column(db.Integer)
+class Handler(db.Model, UserMixin):
+    __tablename__ = 'Handler'
+    adminId = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
-    subject_code = db.Column(db.String(64))
-    branch = db.Column(db.String(64))
-#     paid_status = db.Column(db.Boolean,ForeignKey('fees.paid_status'),default = False)
-#     student = db.relationship('Student')
-#     result = db.relationship('Result')
-#     fees = db.relationship('Fees')
-
-    def __init__(self, rollno, name, subject_code, branch):
-        self.rollno = rollno
-        self.name = name
-        self.subject_code = subject_code
-        self.branch = branch
-
-
-
-#############################################################################################################################################################
-
-# Result Database FIXED
-class Result(db.Model):
-    __tablename__ = 'Result'
-    rollno = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64))
-    branch = db.Column(db.String(64))
-    sem1 = db.Column(db.String(256))
-    sem2 = db.Column(db.String(256))
-    sem3 = db.Column(db.String(256))
-    sem4 = db.Column(db.String(256))
-    sem5 = db.Column(db.String(256))
-    sem6 = db.Column(db.String(256))
-    sem7 = db.Column(db.String(256))
-    sem8 = db.Column(db.String(256))
-    sem9 = db.Column(db.String(256))
-    sem10 = db.Column(db.String(256))
-
-
-    # '1; DBMS:A, MaS:A, SST:B, EVS:B'
-    #  DBMS:A, MaS:A, SST:B, EVS:B
-    def __init__(self, rollno, name, branch, sem1, sem2, sem3, sem4, sem5, sem6, sem7, sem8, sem9, sem10):
-        self.rollno = rollno
-        self.name = name
-        self.branch = branch
-        self.sem1 = sem1
-        self.sem2 = sem2
-        self.sem3 = sem3
-        self.sem4 = sem4
-        self.sem5 = sem5
-        self.sem6 = sem6
-        self.sem7 = sem7
-        self.sem8 = sem8
-        self.sem9 = sem9
-        self.sem10 = sem10
-
-    def __repr__(self):
-        return '<RollNo: {}, Name: {}, Branch: {}, sem1: {}, sem2: {}, sem3: {}>'.format(self.rollno, self.name, self.branch, self.sem1, self.sem2, self.sem3)
-
-# Teachers Database FIXED
-class Teachers(db.Model, UserMixin):
-    name = db.Column(db.String(64))
-    email = db.Column(db.String(64), primary_key=True)
-    dept = db.Column(db.String(64))
-    password = db.Column(db.String(64))
+    password = db.Column(db.String(128))
     password_hash = db.Column(db.String(128))
-
-    def __init__(self, name, email, dept, password):
+    def __init__(self,adminId, name, password):
+        self.adminId = adminId
         self.name = name
-        self.email = email
-        self.dept = dept
         self.password = password
         self.password_hash = generate_password_hash(password)
-
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-    
     def get_id(self):
-        return (self.email)
+        return (self.adminId)
 
-    def __repr__(self):
-        return '<Name: {}, Email: {}, Password: {}>'.format(self.name, self.email, self.password)
+class Hotels(db.Model):
+    __tablename__ = 'Hotels'
+    hotelId = db.Column(db.String(10), primary_key=True)
+    name = db.Column(db.String(64))
+    address = db.Column(db.String(64))
+    totalRooms = db.Column(db.Integer)
+    rating = db.Column(db.Integer)
+    # profile_image = db.Column(db.String(64),nullable=False,default='default_profile.jpg')
+    # profile_image = db.Column(db.String(64)
+    # , nullable=False, default = 'default_profile.jpg')
 
-# Enrollments Database FIXED
+    def __init__(self,hotelId, name, address, totalRooms,rating):
+        self.hotelId = hotelId
+        self.name = name
+        self.address = address
+        self.totalRooms = totalRooms
+        self.rating = rating
 
-class Enrollments(db.Model):
-    rollno = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.String(64), primary_key=True)
-    payment = db.Column(db.String(64))
-    def __init__(self, rollno, subject):
-        self.rollno = rollno
-        self.subject = subject
-        self.payment = 0
+class Rooms(db.Model):
+    __tablename__ = 'Rooms'
+    hotelId = db.Column(db.String(10),ForeignKey('Hotels.hotelId'),primary_key =True)
+    roomNo = db.Column(db.String(64),primary_key=True)
+    capacity = db.Column(db.Integer)
+    status = db.Column(db.Boolean,default=True)
+    # userId = db.Column(db.Integer,ForeignKey('Users.userId'),nullable = True)
+    price = db.Column(db.String(40))
+    # profile_image = db.Column(db.String(64),nullable=False,default='default_profile.jpg')
+    # profile_image = db.Column(db.String(64)
+    # , nullable=False, default = 'default_profile.jpg')
 
-    def __repr__(self):
-        return '<RollNo: {}, Subject: {}>'.format(self.rollno, self.subject)
+    def __init__(self,hotelId, roomNo,capacity,price):
+        self.hotelId = hotelId
+        self.roomNo = roomNo
+        self.capacity = capacity
+        self.price = price
+    
+    def set_userId(self,userId):
+        self.userId = userId
+    
+    def set_status(self,status):
+        self.status = status
+    
+    def set_price(self,price):
+        self.price = price
+
+class Facilities(db.Model):
+    __tablename__ = 'Facilities'
+    hotelId = db.Column(String(10),ForeignKey('Hotels.hotelId'),primary_key = True)
+    gym = db.Column(Boolean,default=False)
+    FoodBeverages = db.Column(Boolean,default=False)
+    Parking = db.Column(Boolean,default=False)
+    Tv = db.Column(Boolean,default=False)
+    wifi = db.Column(Boolean,default=False)
+
+    def __init__(self,hotelId,gym,FoodBeverages,Parking,Tv,wifi):
+        self.hotelId = hotelId
+        self.gym = gym
+        self.FoodBeverages = FoodBeverages
+        self.Parking = Parking
+        self.Tv = Tv
+        self.wifi = wifi       
+
+
+class Room_allotted(db.Model, UserMixin):
+    __tablename__ = 'Room_allotted'
+    hotelId = db.Column(db.String(10),ForeignKey('Hotels.hotelId'),primary_key = True)   
+    roomNo = db.Column(db.String(64),ForeignKey('Rooms.roomNo'), primary_key = True)
+    userId = db.Column(db.Integer,ForeignKey('Users.userId'))
+    checkIn = db.Column(db.String(25))
+    chechOut = db.Column(db.String(25))
+    totalMembers = db.Column(db.Integer)
+    days = db.Column(db.Integer)
+    rate = db.Column(db.Float)
+    amount = db.Column(db.Float)
+    paymentStatus = db.Column(db.Boolean,default = False)
+
+    def __init__(self,hotelId, roomNo, userId, checkIn, chechOut,totalMembers,days,rate,amount):
+        self.hotelId = hotelId
+        self.roomNo = roomNo
+        self.userId = userId
+        self.checkIn = checkIn
+        self.chechOut = chechOut
+        self.totalMembers = totalMembers
+        self.days = days
+        self.rate = rate
+        self.amount = amount
+
+class Drafts(db.Model, UserMixin):
+    __tablename__ = 'Drafts'
+    hotelId = db.Column(db.String(10),ForeignKey('Hotels.hotelId'),primary_key = True)   
+    roomNo = db.Column(db.String(64),ForeignKey('Rooms.roomNo'), primary_key = True)
+    userId = db.Column(db.Integer,ForeignKey('Users.userId'),primary_key = True)
+    checkIn = db.Column(db.String(25))
+    chechOut = db.Column(db.String(25))
+    totalMembers = db.Column(db.Integer)
+    days = db.Column(db.Integer)
+    rate = db.Column(db.Float)
+    amount = db.Column(db.Float)
+    paymentStatus = db.Column(db.Boolean,default = False)
+
+    def __init__(self,hotelId, roomNo, userId, checkIn, chechOut,totalMembers,days,rate,amount):
+        self.hotelId = hotelId
+        self.roomNo = roomNo
+        self.userId = userId
+        self.checkIn = checkIn
+        self.chechOut = chechOut
+        self.totalMembers = totalMembers
+        self.days = days
+        self.rate = rate
+        self.amount = amount
+
+    def set_paymentStatus(self,status):
+        self.paymentStatus = status
+    # def set_userId(self,userId):
+        # self.userId = userId
+
+############### user area ends ##############################

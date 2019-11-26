@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Check-Out User</h1>
+    <form action="" method="post">
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.userId.label }}<br>
+            {{ form.userId(size=32) }}<br>
+            {% for error in form.userId.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+                {{ form.hotelId.label }}<br>
+                {{ form.hotelId(size=32) }}<br>
+                {% for error in form.hotelId.errors %}
+                <span style="color: red;">[{{ error }}]</span>
+                {% endfor %}
+            </p>
+        <p>
+            {{ form.roomNo.label }}<br>
+            {{ form.roomNo(size=32) }}<br>
+            {% for error in form.roomNo.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p>{{ form.submit() }}</p>
+    </form>
+{% endblock %} -->
+
